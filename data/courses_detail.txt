@@ -1,0 +1,89 @@
+Internal Training Programs Overview – Courses Offered
+
+This internal document describes the professional training programs offered by the organization. All courses are designed for students and working professionals aiming to gain practical, industry-ready technical skills.
+
+Each program has a fixed duration of six months. Course fees vary depending on the specialization and depth of training.
+
+All programs emphasize hands-on learning, real-world practice, continuous evaluation, and skill development through structured activities such as mock tests, weekly presentations, workshops, and projects.
+
+--------------------------------------------------
+
+1. Data Science Program
+
+Duration: 6 months  
+Course Fee: 30,000 INR  
+
+The Data Science program focuses on data analysis, statistics, machine learning, and real-world problem solving. Learners are trained in Python programming, data preprocessing, exploratory data analysis, SQL, and machine learning fundamentals.
+
+The course includes extensive hands-on practice using real datasets, regular mock tests to assess understanding, week-wise presentations to improve communication skills, workshops on applied data science use cases, mini-projects, and a final capstone project.
+
+Instructor Metadata:  
+Instructor Name: Vivek Sambharwal  
+Educational Qualification: B.Tech  
+Industry Experience: 2 years  
+
+--------------------------------------------------
+
+2. Web Development Program
+
+Duration: 6 months  
+Course Fee: 20,000 INR  
+
+The Web Development program covers full-stack web development concepts. Learners study frontend technologies such as HTML, CSS, and JavaScript, along with backend development, databases, and deployment practices.
+
+The program provides hands-on coding sessions, weekly presentations, mock tests for technical assessment, and workshops focused on building real-world web applications.
+
+Instructor Metadata:  
+Instructor Name: Sahil  
+Educational Qualification: B.Tech, M.Tech  
+Industry Experience: 4 years  
+
+--------------------------------------------------
+
+3. Blockchain Technology Program
+
+Duration: 6 months  
+Course Fee: 35,000 INR  
+
+The Blockchain Technology program introduces decentralized systems and distributed ledger concepts. Topics include blockchain fundamentals, smart contracts, cryptocurrencies, and decentralized applications.
+
+Learners gain practical exposure through hands-on labs, mock assessments, weekly topic presentations, and workshops focused on blockchain implementation and industry use cases.
+
+Instructor Metadata:  
+Instructor Name: Agrim  
+Educational Qualification: B.Tech  
+Industry Experience: 6 years  
+
+--------------------------------------------------
+
+4. Cyber Security Program
+
+Duration: 6 months  
+Course Fee: 25,000 INR  
+
+The Cyber Security program focuses on protecting computer systems, networks, and data from cyber threats. The curriculum includes network security, ethical hacking fundamentals, vulnerability assessment, threat analysis, and security best practices.
+
+The course includes practical labs, simulated attack scenarios, mock tests, weekly presentations, and hands-on workshops addressing real-world cyber security challenges.
+
+Instructor Metadata:  
+Instructor Name: Arun  
+Educational Qualification: BCA, MCA  
+Industry Experience: 8 years (Industrial Experience)  
+
+--------------------------------------------------
+
+5. Cloud Computing Program
+
+Duration: 6 months  
+Course Fee: 22,000 INR  
+
+The Cloud Computing program provides an in-depth understanding of cloud infrastructure and services. Learners study cloud fundamentals, virtualization, storage, networking, and cloud deployment models.
+
+The program focuses on hands-on cloud labs, mock tests, week-wise presentations, and workshops on deploying, managing, and scaling cloud-based applications.
+
+Instructor Metadata:  
+Instructor Name: Pankaj  
+Educational Qualification: BCA, MCA  
+Industry Experience: 3 years  
+
+--------------------------------------------------
