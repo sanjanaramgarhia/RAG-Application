@@ -58,25 +58,34 @@ class RAGSearch:
         is_short_query = any(k in query.lower() for k in short_keywords)
     
         if is_short_query:
-            prompt = f"""
-You are given information about multiple courses.
-
-Step 1:
-Identify the SINGLE course that best matches the question.
-
-Step 2:
-Answer ONLY using information from that selected course.
-
-Rules:
-- If the information is NOT clearly present for that course, say:
-  "The requested information is not available."
-- Answer in MAXIMUM 3–4 lines
-- Do NOT guess
-- Do NOT mix courses
+            prompt = f"""You are a professional course advisor. Based on the following context, provide a comprehensive and well-structured response to the query: '{query}'
 
 Context:
 {context}
 
-Question:
-{query}
-"""
+Please format your response professionally with the following structure:
+
+## Course Overview
+[Brief introduction and key highlights]
+
+## Course Metadata
+- **Course Name:** [Name]
+- **Duration:** [Duration]
+- **Course Fee:** [Fee]
+- **Instructor:** [Name with qualifications and experience]
+
+## Course Details
+### Curriculum & Learning Objectives
+[Detailed description of what students will learn]
+
+### Course Structure & Methodology
+[Information about hands-on practice, assessments, projects, etc.]
+
+### Key Features
+[Highlight unique aspects and benefits]
+
+Make the response professional, informative, and well-organized. Use proper formatting with headers, bullet points, and clear sections. If multiple courses are relevant, structure each course separately."""
+
+        response = self.llm.invoke([prompt])
+        return response.content
+
