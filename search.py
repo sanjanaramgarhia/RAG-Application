@@ -38,49 +38,55 @@ class RAGSearch:
 
         print(f"[INFO] Groq LLM initialized: {llm_model}")
 
-    def search_and_summarize(self, query: str, top_k: int = 5) -> str:
-        results = self.vectorstore.query(query, top_k=top_k)
-        texts = [r["metadata"].get("text", "") for r in results if r.get("metadata")]
+    def search_and_summarize(self, query: str, top_k: int = 3) -> str:
+    results = self.vectorstore.query(query, top_k=top_k)
+    texts = [r["metadata"].get("text", "") for r in results if r.get("metadata")]
 
-        context = "\n\n".join(texts)
+    context = "\n\n".join(texts)
 
-        if not context:
-            return (
-                "I apologize, but I couldn't find any relevant information "
-                "in the database for your query. Please try rephrasing."
-            )
+    if not context:
+        return "No relevant information found."
 
+    short_keywords = [
+        "fee", "fees", "cost", "price",
+        "duration", "length",
+        "eligibility",
+        "instructor",
+        "timing"
+    ]
+
+    is_short_query = any(k in query.lower() for k in short_keywords)
+
+    if is_short_query:
         prompt = f"""
-You are a professional course advisor. Based on the following context,
-provide a comprehensive and well-structured response to the query.
+You are given information about MULTIPLE courses.
 
-Query:
-{query}
+Task:
+- Identify the SINGLE most relevant course for the question
+- Answer ONLY about that course
+- Answer in MAXIMUM 3–4 lines
+- Do NOT mention other courses
+- Do NOT add extra information
 
 Context:
 {context}
 
-Format the response as:
+Question:
+{query}
+"""
+    else:
+        prompt = f"""
+You are a professional course advisor.
 
-## Course Overview
+Use the context to provide a structured and detailed response.
 
-## Course Metadata
-- **Course Name**
-- **Duration**
-- **Course Fee**
-- **Instructor**
+Context:
+{context}
 
-## Course Details
-### Curriculum & Learning Objectives
-### Course Structure & Methodology
-### Key Features
+Question:
+{query}
 """
 
-        # ✅ Correct LangChain invoke
-        response = self.llm.invoke(prompt)
-        return response.content
-
-
-
-        
-        
+    response = self.llm.invoke(prompt)
+    return response.content
+  
