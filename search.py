@@ -59,34 +59,24 @@ class RAGSearch:
     
         if is_short_query:
             prompt = f"""
-    You are given information about MULTIPLE courses.
-    
-    Task:
-    - Identify the SINGLE most relevant course for the question
-    - Answer ONLY about that course
-    - Answer in MAXIMUM 3–4 lines
-    - Do NOT mention other courses
-    - Do NOT add extra information
-    
-    Context:
-    {context}
-    
-    Question:
-    {query}
-    """
-        else:
-            prompt = f"""
-    You are a professional course advisor.
-    
-    Use the context to provide a structured and detailed response.
-    
-    Context:
-    {context}
-    
-    Question:
-    {query}
-    """
-    
-        response = self.llm.invoke(prompt)
-        return response.content
-      
+You are given information about multiple courses.
+
+Step 1:
+Identify the SINGLE course that best matches the question.
+
+Step 2:
+Answer ONLY using information from that selected course.
+
+Rules:
+- If the information is NOT clearly present for that course, say:
+  "The requested information is not available."
+- Answer in MAXIMUM 3–4 lines
+- Do NOT guess
+- Do NOT mix courses
+
+Context:
+{context}
+
+Question:
+{query}
+"""
