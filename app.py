@@ -12,9 +12,8 @@ st.set_page_config(
 @st.cache_resource
 def init_rag_system():
     try:
-        return RAGSearch(
-            groq_api_key=st.secrets["GROQ_API_KEY"]
-        )
+        return RAGSearch()
+        
     except Exception as e:
         st.error(f"Error initializing RAG system: {e}")
         return None
