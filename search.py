@@ -39,54 +39,54 @@ class RAGSearch:
         print(f"[INFO] Groq LLM initialized: {llm_model}")
 
     def search_and_summarize(self, query: str, top_k: int = 3) -> str:
-    results = self.vectorstore.query(query, top_k=top_k)
-    texts = [r["metadata"].get("text", "") for r in results if r.get("metadata")]
-
-    context = "\n\n".join(texts)
-
-    if not context:
-        return "No relevant information found."
-
-    short_keywords = [
-        "fee", "fees", "cost", "price",
-        "duration", "length",
-        "eligibility",
-        "instructor",
-        "timing"
-    ]
-
-    is_short_query = any(k in query.lower() for k in short_keywords)
-
-    if is_short_query:
-        prompt = f"""
-You are given information about MULTIPLE courses.
-
-Task:
-- Identify the SINGLE most relevant course for the question
-- Answer ONLY about that course
-- Answer in MAXIMUM 3–4 lines
-- Do NOT mention other courses
-- Do NOT add extra information
-
-Context:
-{context}
-
-Question:
-{query}
-"""
-    else:
-        prompt = f"""
-You are a professional course advisor.
-
-Use the context to provide a structured and detailed response.
-
-Context:
-{context}
-
-Question:
-{query}
-"""
-
-    response = self.llm.invoke(prompt)
-    return response.content
-  
+        results = self.vectorstore.query(query, top_k=top_k)
+        texts = [r["metadata"].get("text", "") for r in results if r.get("metadata")]
+    
+        context = "\n\n".join(texts)
+    
+        if not context:
+            return "No relevant information found."
+    
+        short_keywords = [
+            "fee", "fees", "cost", "price",
+            "duration", "length",
+            "eligibility",
+            "instructor",
+            "timing"
+        ]
+    
+        is_short_query = any(k in query.lower() for k in short_keywords)
+    
+        if is_short_query:
+            prompt = f"""
+    You are given information about MULTIPLE courses.
+    
+    Task:
+    - Identify the SINGLE most relevant course for the question
+    - Answer ONLY about that course
+    - Answer in MAXIMUM 3–4 lines
+    - Do NOT mention other courses
+    - Do NOT add extra information
+    
+    Context:
+    {context}
+    
+    Question:
+    {query}
+    """
+        else:
+            prompt = f"""
+    You are a professional course advisor.
+    
+    Use the context to provide a structured and detailed response.
+    
+    Context:
+    {context}
+    
+    Question:
+    {query}
+    """
+    
+        response = self.llm.invoke(prompt)
+        return response.content
+      
