@@ -59,7 +59,7 @@ class RAGSearch:
 
         is_short_query = any(k in query.lower() for k in short_keywords)
 
-        # ---- IMPORTANT: prompt must always exist ----
+        # ---- prompt MUST always exist ----
         prompt = ""
 
         if is_short_query:
@@ -104,4 +104,3 @@ Answer clearly and concisely.
         # ---- LLM call ----
         response = self.llm.invoke(prompt)
         return response.content
-
