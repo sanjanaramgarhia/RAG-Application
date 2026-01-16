@@ -86,6 +86,6 @@ Please format your response professionally with the following structure:
 
 Make the response professional, informative, and well-organized. Use proper formatting with headers, bullet points, and clear sections. If multiple courses are relevant, structure each course separately."""
 
-        response = self.llm.invoke([prompt])
+        response = self.llm.invoke(prompt)
         return response.content
 
