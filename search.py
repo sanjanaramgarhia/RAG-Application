@@ -54,8 +54,8 @@ class RAGSearch:
             "instructor",
             "timing"
         ]
-    
         is_short_query = any(k in query.lower() for k in short_keywords)
+        prompt = None
     
         if is_short_query:
             prompt = f"""You are a professional course advisor. Based on the following context, provide a comprehensive and well-structured response to the query: '{query}'
