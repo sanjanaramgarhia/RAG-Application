@@ -39,66 +39,69 @@ class RAGSearch:
         print(f"[INFO] Groq LLM initialized: {llm_model}")
 
     def search_and_summarize(self, query: str, top_k: int = 3) -> str:
-            results = self.vectorstore.query(query, top_k=top_k)
-            texts = [r["metadata"].get("text", "") for r in results if r.get("metadata")]
-        
-            context = "\n\n".join(texts)
-        
-            if not context:
-                return "No relevant information found."
-        
-            short_keywords = [
-                "fee", "fees", "cost", "price",
-                "duration", "length",
-                "eligibility",
-                "instructor",
-                "timing"
-            ]
-        
-            is_short_query = any(k in query.lower() for k in short_keywords)
-        
-            prompt = None
-        
-            if is_short_query:
-                prompt = f"""You are a professional course advisor. Based on the following context, provide a comprehensive and well-structured response to the query: '{query}'
-        
-        Context:
-        {context}
-        
-        Please format your response professionally with the following structure:
-        
-        ## Course Overview
-        [Brief introduction and key highlights]
-        
-        ## Course Metadata
-        - **Course Name:** [Name]
-        - **Duration:** [Duration]
-        - **Course Fee:** [Fee]
-        - **Instructor:** [Name with qualifications and experience]
-        
-        ## Course Details
-        ### Curriculum & Learning Objectives
-        [Detailed description of what students will learn]
-        
-        ### Course Structure & Methodology
-        [Information about hands-on practice, assessments, projects, etc.]
-        
-        ### Key Features
-        [Highlight unique aspects and benefits]
-        
-        Make the response professional, informative, and well-organized. Use proper formatting with headers, bullet points, and clear sections. If multiple courses are relevant, structure each course separately."""
-            else:
-                prompt = f"""
-        Context:
-        {context}
-        
-        Question:
-        {query}
-        
-        Answer clearly and concisely.
-        """  
-        
-            response = self.llm.invoke(prompt)
-            return response.content
-        
-        
+        # ---- Retrieve documents ----
+        results = self.vectorstore.query(query, top_k=top_k)
+        texts = [r["metadata"].get("text", "") for r in results if r.get("metadata")]
+
+        context = "\n\n".join(texts)
+
+        if not context:
+            return "No relevant information found."
+
+        # ---- Keyword routing ----
+        short_keywords = [
+            "fee", "fees", "cost", "price",
+            "duration", "length",
+            "eligibility",
+            "instructor",
+            "timing"
+        ]
+
+        is_short_query = any(k in query.lower() for k in short_keywords)
+
+        # ---- IMPORTANT: prompt must always exist ----
+        prompt = ""
+
+        if is_short_query:
+            prompt = f"""You are a professional course advisor. Based on the following context, provide a comprehensive and well-structured response to the query: '{query}'
+
+Context:
+{context}
+
+Please format your response professionally with the following structure:
+
+## Course Overview
+[Brief introduction and key highlights]
+
+## Course Metadata
+- **Course Name:** [Name]
+- **Duration:** [Duration]
+- **Course Fee:** [Fee]
+- **Instructor:** [Name with qualifications and experience]
+
+## Course Details
+### Curriculum & Learning Objectives
+[Detailed description of what students will learn]
+
+### Course Structure & Methodology
+[Information about hands-on practice, assessments, projects, etc.]
+
+### Key Features
+[Highlight unique aspects and benefits]
+
+Make the response professional, informative, and well-organized. Use proper formatting with headers, bullet points, and clear sections. If multiple courses are relevant, structure each course separately."""
+        else:
+            prompt = f"""
+Context:
+{context}
+
+Question:
+{query}
+
+Answer clearly and concisely.
+"""
+
+        # ---- LLM call ----
+        response = self.llm.invoke(prompt)
+        return response.content
+
