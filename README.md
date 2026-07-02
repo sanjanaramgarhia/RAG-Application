@@ -4,6 +4,8 @@ A modular Retrieval-Augmented Generation (RAG) application built using **LangCha
 
 This project allows users to query PDF and CSV documents using natural language. The system retrieves the most relevant document chunks using semantic search and generates accurate responses using a Large Language Model (LLM).
 
+Live - https://rag-application-a7qxar75zjwjjfuccvsehq.streamlit.app/
+
 ---
 
 # Features
